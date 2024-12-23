@@ -1,12 +1,12 @@
 package org.example.pages.flightReservations;
 
+import org.example.pages.AbstractPage;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class flightRegistration {
-    private WebDriver driver;
+public class FlightRegistration extends AbstractPage {
 
     @FindBy(id = "firstName")
     private WebElement firstNameInput;
@@ -33,10 +33,15 @@ public class flightRegistration {
     private WebElement registerButton;
 
     //constructor
-    public flightRegistration(WebDriver driver)
+    public FlightRegistration(WebDriver driver)
     {
-        this.driver = driver;
-        PageFactory.initElements(driver, this);
+       super(driver);
+    }
+
+    @Override
+    public boolean isAt() {
+        this.wait.until(ExpectedConditions.visibilityOf(this.firstNameInput));
+        return this.firstNameInput.isDisplayed();
     }
 
     //to get the base URL:
